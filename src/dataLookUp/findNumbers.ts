@@ -1,7 +1,7 @@
 import { INumberTrio } from './interfaces/numberTrio.interface';
-import { INumberTuple } from './interfaces/numberTuple.interface';
+import { INumberPair } from './interfaces/numberPair.interface';
 
-export const findTupleThatAddsUpTo2020 = (data: number[]): INumberTuple => {
+export const findTupleThatAddsUpTo2020 = (data: number[]): INumberPair => {
     if (data.length > 1) {
         const head = data[0];
         data.splice(0, 1);
@@ -19,8 +19,8 @@ export const findTupleThatAddsUpTo2020 = (data: number[]): INumberTuple => {
     throw new Error('no tuple was found');
 };
 
-const findTuplesThatAddsUpToLessThan2020 = (data: number[]): INumberTuple[] => {
-    let result: INumberTuple[] = [];
+const findTuplesThatAddsUpToLessThan2020 = (data: number[]): INumberPair[] => {
+    let result: INumberPair[] = [];
 
     if (data.length > 1) {
         const head = data[0];
