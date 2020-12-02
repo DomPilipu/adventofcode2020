@@ -1,62 +1,40 @@
 import { INumberTrio } from './interfaces/numberTrio.interface';
 import { INumberPair } from './interfaces/numberPair.interface';
 
-export const findTupleThatAddsUpTo2020 = (data: number[]): INumberPair => {
+export const findTupleThatAddsUpTo = (target: number, data: number[]): INumberPair => {
     if (data.length > 1) {
         const head = data[0];
         data.splice(0, 1);
 
         for (const num of data) {
-            if (head + num === 2020) {
+            if (head + num === target) {
                 return {
                     a: head,
                     b: num,
                 };
             }
         }
-        return findTupleThatAddsUpTo2020(data);
+        return findTupleThatAddsUpTo(target, data);
     }
-    throw new Error('no tuple was found');
+    return null;
 };
 
-const findTuplesThatAddsUpToLessThan2020 = (data: number[]): INumberPair[] => {
-    let result: INumberPair[] = [];
-
-    if (data.length > 1) {
-        const head = data[0];
-        data.splice(0, 1);
-
-        for (const num of data) {
-            if (head + num < 2020) {
-                result.push({
-                    a: head,
-                    b: num,
-                });
-            }
-        }
-
-        result = result.concat(findTuplesThatAddsUpToLessThan2020(data));
-    }
-
-    return result;
-};
-
-export const findTrioThatAddsUpTo2020 = (data: number[]): INumberTrio => {
+export const findTrioThatAddsUpTo = (target: number, data: number[]): INumberTrio => {
     if (data.length > 2) {
         const head = data[0];
         data.splice(0, 1);
 
-        const tuples = findTuplesThatAddsUpToLessThan2020([...data]);
-        for (const tuple of tuples) {
-            if (head + tuple.a + tuple.b === 2020) {
-                return {
-                    a: head,
-                    b: tuple.a,
-                    c: tuple.b,
-                };
-            }
+        const tupleTarget = target - head;
+
+        const tuple = findTupleThatAddsUpTo(tupleTarget, [...data]);
+        if (tuple) {
+            return {
+                a: head,
+                b: tuple.a,
+                c: tuple.b,
+            };
         }
-        return findTrioThatAddsUpTo2020(data);
+        return findTrioThatAddsUpTo(target, data);
     }
 
     throw new Error('no trio was found');
