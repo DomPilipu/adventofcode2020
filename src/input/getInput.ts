@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { IPasswordDataEntry } from './interfaces/corruptedPasswordDataEntry.interface';
+import { IMapRow } from './interfaces/mapRow.interface';
 
 const getInput = (file: string): string => {
     try {
@@ -46,4 +47,19 @@ export const getCorruptedPasswordData = (): IPasswordDataEntry[] => {
     }
 
     return result;
+};
+
+export const getMap = (): IMapRow[] => {
+    const data = getInput('3');
+    const dataSplitted = data.split(/\r?\n/);
+
+    const rows: IMapRow[] = [];
+
+    for (const data of dataSplitted) {
+        rows.push({
+            squares: data.split(''),
+        });
+    }
+
+    return rows;
 };
