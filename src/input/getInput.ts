@@ -63,3 +63,8 @@ export const getMap = (): IMapRow[] => {
 
     return rows;
 };
+
+export const getPassportData = (): string[] => {
+    const data = getInput('4');
+    return data.split(/\r?\n/);
+};
