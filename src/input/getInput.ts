@@ -68,3 +68,12 @@ export const getPassportData = (): string[] => {
     const data = getInput('4');
     return data.split(/\r?\n/);
 };
+
+export const getBoardingPassData = (): string[][] => {
+    const data = getInput('5');
+    const result: string[][] = [];
+    for (const dataEntry of data.split(/\r?\n/)) {
+        result.push(dataEntry.split(''));
+    }
+    return result;
+};
